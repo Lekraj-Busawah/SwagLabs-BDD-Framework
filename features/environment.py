@@ -16,8 +16,17 @@ def before_scenario(context, scenario):
     # 2. Setup browser    
     # use before_scenario to open a fresh browser after every test
     browser_name = ReadConfig.get_browser()
+    
+    headless_mode = ReadConfig.get_headless_mode() 
+
     if browser_name == 'chrome':
-        context.driver = webdriver.Chrome()
+        options = webdriver.ChromeOptions()
+        if headless_mode:
+            options.add_argument("--headless")
+            options.add_argument("--no-sandbox") # Required for Linux/CI
+            options.add_argument("--disable-dev-shm-usage") # Required for Linux/CI
+            options.add_argument("--window-size=1920,1080")
+        context.driver = webdriver.Chrome(options=options)
     elif browser_name == 'firefox':
         context.driver = webdriver.Firefox()
     elif browser_name == 'edge':
