@@ -24,3 +24,11 @@ class ReadConfig:
     def get_password():
         password = config.get('common info', 'password')
         return password
+    
+    @staticmethod
+    def get_headless_mode():
+        try:
+            headless = config.get('common info', 'headless')
+            return headless.lower() == 'true'
+        except:
+            return False
