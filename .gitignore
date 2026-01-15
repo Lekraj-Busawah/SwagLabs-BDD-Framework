@@ -1,0 +1,11 @@
+# Python / PyCharm / VS Code junk
+__pycache__/
+*.py[cod]
+.venv/
+.idea/
+.vscode/
+
+# Framework Generated Artifacts
+reports/
+screenshots/
+automation.log
